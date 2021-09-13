@@ -6,7 +6,7 @@ const loadProducts = () => {
 
 // show all product in UI 
 const showProducts = (products) => {
-  console.log(products);
+  
   const allProducts = products.map((pd) => pd);
   
   for (const product of allProducts) {
@@ -26,7 +26,7 @@ const showProducts = (products) => {
       <hr>
       <div class="my-3">
       <h3>Price: $ ${product.price}</h3>
-      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-primary btn-sm">Add to Cart</button>
+      <button onclick="addToCart(${product.id},${product.price}), updateTotal()" id="addToCart-btn" class="buy-now btn btn-primary btn-sm">Add to Cart</button>
       <button id="details-btn" class="btn btn-warning btn-sm ">Details</button>
       </div>
       </div>
@@ -35,10 +35,6 @@ const showProducts = (products) => {
     document.getElementById("all-products").appendChild(div);
   }
 };
-
-// show details modal
-const showDetails = () => {}
-
 
 // product counter
 let count = 0;
@@ -52,7 +48,7 @@ const addToCart = (id, price) => {
 
 const getInputValue = (id) => {
   const element = document.getElementById(id).innerText;
-  const converted = parseInt(element);
+  const converted = parseFloat(element);
   return converted;
 };
 
@@ -86,18 +82,12 @@ const updateTaxAndCharge = () => {
     setInnerText("total-tax", priceConverted * 0.4);
   }
 };
-console.log(getInputValue('price'));
-console.log(getInputValue('delivery-charge'));
-console.log(getInputValue('total-tax'));
-
+// grand total
 const updateTotal = () => {
   const grandTotal =
     getInputValue("price") + getInputValue("delivery-charge") +
     getInputValue("total-tax");
-    
-    console.log(grandTotal);
-  document.getElementById("total").innerText = grandTotal;
-  return grandTotal;
+  document.getElementById("total").innerText = grandTotal.toFixed(2);
 };
-updateTotal();
+
 loadProducts();
