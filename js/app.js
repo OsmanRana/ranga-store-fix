@@ -17,14 +17,20 @@ const showProducts = (products) => {
       <div>
       <img class="product-image mb-5" src=${image}></img>
       </div>
+      <div class="description">
       <h5>${product.title}</h5>
       <p class="text-capitalize">Category: ${product.category}</p>
       <p>Average Rating: ${product.rating.rate}</p>
       <p>Reviews:  ${product.rating.count}</p>
-      <h3>Price: $ ${product.price}</h3>
-      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-primary btn-">add to cart</button>
-      <button id="details-btn" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Details</button>
       </div>
+      <hr>
+      <div class="my-3">
+      <h3>Price: $ ${product.price}</h3>
+      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-primary btn-sm">Add to Cart</button>
+      <button id="details-btn" class="btn btn-warning btn-sm ">Details</button>
+      </div>
+      </div>
+      
       `;
     document.getElementById("all-products").appendChild(div);
   }
@@ -88,8 +94,10 @@ const updateTotal = () => {
   const grandTotal =
     getInputValue("price") + getInputValue("delivery-charge") +
     getInputValue("total-tax");
+    
     console.log(grandTotal);
   document.getElementById("total").innerText = grandTotal;
+  return grandTotal;
 };
 updateTotal();
 loadProducts();
